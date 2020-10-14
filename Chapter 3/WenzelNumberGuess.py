@@ -18,4 +18,4 @@ while guess != the_number:
         print("\nYou are out of tries!")
         exit()
 
-print("you guessed it! The number was", the_number)
+print("You guessed it! The number was", the_number)
