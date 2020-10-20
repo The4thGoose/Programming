@@ -27,3 +27,5 @@ while continuewhile.lower() == "y":
         continuewhile = "y"
     elif continuewhile == "":
         exit()
+
+input("\nPress enter to exit...")
