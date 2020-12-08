@@ -14,10 +14,10 @@ print ("Welcome to the Candy Program")
 game = []
 numberlist = 1
 for item in range (1,6):
-  FGAME = input("What is game #" + str(numberlist) + "? ")
-  numberlist += 1
-  game.append(FGAME)
+    FGAME = input("What is game #" + str(numberlist) + "? ")
+    numberlist += 1
+    game.append(FGAME)
 
 game.sort()
 for item in game: 
-  print(item)
+    print(item)
