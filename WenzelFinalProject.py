@@ -37,6 +37,14 @@ selection = ""
 newcustomer = True
 # Var customervalid: valid selection for new customer question
 customervalid = False
+# Var d: used in post-order totals to calculate final costs, replaces hamount through lamount in certain circumstances
+# Var printprice: used as a buffer to store temporary prices to be printed in menus
+printprice = 0
+# Var orderprice: used for calculating and determining final price and tax
+orderprice = 0
+# Var tax: It's... tax
+tax = 0
+# Var finalorderprice: its the orderprice (subtotal) plus tax
 
 # Clears console, prints welcome message, waits (waitime) amount of seconds, clears console
 os.system('cls' if os.name == 'nt' else 'clear')
@@ -57,7 +65,11 @@ while newcustomer == True:
         for entry in extramenu:
             a, b = entry
             print("{:<8}{:<20}".format(a, b))
+        # Lazy New Line
+        print("")
+        # Asks for selection
         selection = input("What is your selection? ")
+        # Based on selection, adds one to the ticker for the menu item
         if selection.lower() == "h": 
             valid = False
             hamount += 1
@@ -78,12 +90,58 @@ while newcustomer == True:
             lamount += 1
         elif selection.lower() == "a":
             valid = True
+        elif selection.lower() == "r":
+            # DON'T FORGET TO IMPLIMENT SALES REPORT
+            valid = False
         else:
             os.system('cls' if os.name == 'nt' else 'clear')
             print("Not a Valid Selection")
             print("Please Try Again")
             print("")
         customervalid = False
+        os.system('cls' if os.name == 'nt' else 'clear')
+    # Sales Report
+    print("{:<20}{:<20}{:<10}".format("Item", "Quantity", "Sales"))
+    for entry in menu:
+        a, b, c = entry
+        if a.lower() == "h":
+            d = hamount
+            htotalamount += hamount
+        elif a.lower() == "c":
+            d = camount
+            ctotalamount += camount
+        elif a.lower() == "f":
+            d = famount
+            ftotalamount += famount
+        elif a.lower() == "o":
+            d = oamount
+            ototalamount += oamount
+        elif a.lower() == "s":
+            d = samount
+            stotalamount += samount
+        elif a.lower() == "l":
+            d = lamount
+            ltotalamount += lamount
+        printprice = float(d * c)
+        orderprice += printprice
+        print("{:<20}{:<20}${:<10,.2f}".format(b, d, printprice))
+    # Ask for input (press enter to continue)
+    input("Press enter to continue...")
+    # Clear Console
+    os.system('cls' if os.name == 'nt' else 'clear')
+    # Calculate tax and print menus
+    tax = orderprice * 0.05
+    finalorderprice = orderprice + tax
+    print("{:<10}${:<10,.2f}".format("Subtotal:", orderprice))
+    print("{:<10}${:<10,.2f}".format("Tax:", tax))
+    print("{:<10}${:<10,.2f}".format("Total:", finalorderprice))
+    # Reset hamount through lamount 
+    hamount = 0
+    camount = 0
+    famount = 0
+    oamount = 0
+    samount = 0
+    lamount = 0
     while customervalid == False:
         customerselection = input("Would you like to enter a new customer (yes/no)? ")
         if customerselection.lower() == "yes" or customerselection.lower() == "y":
