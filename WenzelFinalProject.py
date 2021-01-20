@@ -24,11 +24,19 @@ famount = 0
 oamount = 0
 samount = 0
 lamount = 0
+# Var htotalamount - ltotalamount: used for calculating sales report
+htotalamount = 0
+ctotalamount = 0
+ftotalamount = 0
+ototalamount = 0
+stotalamount = 0
+ltotalamount = 0
 # Var Selection: the current selection to be added to the order
 selection = ""
 # Var newcustomer: basically, do you want a new customer
 newcustomer = True
-
+# Var customervalid: valid selection for new customer question
+customervalid = False
 
 # Clears console, prints welcome message, waits (waitime) amount of seconds, clears console
 os.system('cls' if os.name == 'nt' else 'clear')
@@ -68,8 +76,23 @@ while newcustomer == True:
         elif selection.lower() == "l":
             valid = False
             lamount += 1
+        elif selection.lower() == "a":
+            valid = True
         else:
             os.system('cls' if os.name == 'nt' else 'clear')
             print("Not a Valid Selection")
             print("Please Try Again")
             print("")
+        customervalid = False
+    while customervalid == False:
+        customerselection = input("Would you like to enter a new customer (yes/no)? ")
+        if customerselection.lower() == "yes" or customerselection.lower() == "y":
+            newcustomer = True
+            customervalid = True
+            valid = False
+        elif customerselection.lower() == "no" or customerselection.lower() == "n":
+            newcustomer = False
+            customervalid = True
+            valid = True
+        else: 
+            customervalid = False
