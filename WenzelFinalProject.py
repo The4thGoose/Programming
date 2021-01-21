@@ -4,7 +4,7 @@
 # It's a cash register or something, IDK
 # You will find the variable dictionary entries right above the respective variable's definition 
 
-# imports modules
+# Imports modules
 import os
 import time
 import random
