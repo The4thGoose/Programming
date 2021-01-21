@@ -45,6 +45,10 @@ orderprice = 0
 # Var tax: It's... tax
 tax = 0
 # Var finalorderprice: its the orderprice (subtotal) plus tax
+# Var amountcollected: amount of money collected from the customer
+amountcollected = 0
+# Var changeamount: how much change is owed to the customer
+changeamount = 0
 
 # Clears console, prints welcome message, waits (waitime) amount of seconds, clears console
 os.system('cls' if os.name == 'nt' else 'clear')
@@ -93,6 +97,40 @@ while newcustomer == True:
         elif selection.lower() == "r":
             # DON'T FORGET TO IMPLIMENT SALES REPORT
             valid = False
+            os.system('cls' if os.name == 'nt' else 'clear')
+            for entryitem in menu:
+                a, b, c = entryitem
+                if a.lower() == "h":
+                    # Hamburger
+                    # 1.29
+                    d = htotalamount * c
+                    print("{:<20}${:<20,.2f}${:<10,.2f}".format(b, c, d))
+                elif a.lower() == "c":
+                    # Cheeseburger
+                    # 1.49
+                    d = ctotalamount * c
+                    print("{:<20}${:<20,.2f}${:<10,.2f}".format(b, c, d))
+                elif a.lower() == "f":
+                    # Fries
+                    # 0.99
+                    d = ftotalamount * c
+                    print("{:<20}${:<20,.2f}${:<10,.2f}".format(b, c, d))
+                elif a.lower() == "o":
+                    # Onion Rings
+                    # 1.09
+                    d = ototalamount * c
+                    print("{:<20}${:<20,.2f}${:<10,.2f}".format(b, c, d))
+                elif a.lower() == "s":
+                    # Small Soft Drink
+                    # 0.79
+                    d = stotalamount * c
+                    print("{:<20}${:<20,.2f}${:<10,.2f}".format(b, c, d))
+                elif a.lower() == "l":
+                    # Large Soft Drink
+                    #1.19
+                    d = ltotalamount * c
+                    print("{:<20}${:<20,.2f}${:<10,.2f}".format(b, c, d))
+            input("Press enter to continue...")
         else:
             os.system('cls' if os.name == 'nt' else 'clear')
             print("Not a Valid Selection")
@@ -135,6 +173,10 @@ while newcustomer == True:
     print("{:<10}${:<10,.2f}".format("Subtotal:", orderprice))
     print("{:<10}${:<10,.2f}".format("Tax:", tax))
     print("{:<10}${:<10,.2f}".format("Total:", finalorderprice))
+    # Ask amount collected
+    amountcollected = float(input("\nEnter the amount collected: $"))
+    changeamount = amountcollected - finalorderprice
+    print("{:<20}${:<20,.2f}".format("Change:", changeamount))
     # Reset hamount through lamount 
     hamount = 0
     camount = 0
@@ -142,6 +184,7 @@ while newcustomer == True:
     oamount = 0
     samount = 0
     lamount = 0
+    # Asks if you want a new customer
     while customervalid == False:
         customerselection = input("Would you like to enter a new customer (yes/no)? ")
         if customerselection.lower() == "yes" or customerselection.lower() == "y":
